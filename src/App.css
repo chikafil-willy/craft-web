@@ -215,6 +215,34 @@
     outline: none;
   }
 }
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  animation: slideDown 0.3s ease-in-out;
+  z-index: 99;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Center welcome section */
 .home-container {
   padding: 20px;

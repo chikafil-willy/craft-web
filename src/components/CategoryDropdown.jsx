@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const categories = [
-  "Shirts & Polos",
-  "Trousers",
-  "Caps",
-  "Jewelries",
-  "Shoes",
-];
+const categories = ["Nails", "Glasses"];
 
 const CategoryDropdown = ({ icon }) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +20,7 @@ const CategoryDropdown = ({ icon }) => {
           {categories.map((cat, index) => (
             <Link
               key={index}
-              to={`/category/${encodeURIComponent(cat)}`}
+              to={`/category/${encodeURIComponent(cat.toLowerCase())}`}
               onClick={handleLinkClick} // close dropdown when link clicked
             >
               {cat}

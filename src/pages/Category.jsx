@@ -5,14 +5,10 @@ import ProductCard from '../components/ProductCard';
 import { SearchContext } from '../context/SearchContext';
 import { usePagination } from '../context/PaginationContext'; // ✅ Import pagination context
 
-// ✅ Map readable names to Supabase table names
+// ✅ Only two categories now
 const tableMap = {
-  'shirts & polos': 'shirts_and_polos',
-  'shirts-and-polos': 'shirts_and_polos',
-  trousers: 'trousers',
-  caps: 'caps',
-  jewelries: 'jewelries',
-  shoes: 'shoes',
+  nails: 'nails',
+  glasses: 'glasses',
 };
 
 const Category = () => {
