@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   MdSearch,
@@ -16,8 +16,28 @@ const Navbar = () => {
   const { cart } = useCart();
   const { searchTerm, setSearchTerm } = useSearch();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  // 🧩 Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <nav className="navbar">
@@ -28,11 +48,15 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* RIGHT SIDE - DESKTOP */}
+      {/* RIGHT SIDE - DESKTOP VIEW */}
       <div className="navbar-right desktop-only">
-        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
         <CategoryDropdown />
-        <Link to="/about" className="nav-link">About Us</Link>
+        <Link to="/about" className="nav-link">
+          About Us
+        </Link>
 
         {/* SEARCH BAR */}
         <div className="search-container">
@@ -60,9 +84,9 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* MOBILE VIEW */}
+      {/* RIGHT SIDE - MOBILE VIEW */}
       <div className="navbar-right mobile-only">
-        {/* Search bar beside hamburger */}
+        {/* Search beside hamburger */}
         <div className="search-container">
           <input
             type="text"
@@ -81,7 +105,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Hamburger / Close icon */}
+        {/* Hamburger / Close */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
@@ -90,28 +114,106 @@ const Navbar = () => {
             cursor: "pointer",
           }}
         >
-          {menuOpen ? <MdClose size={25} /> : <MdMenu size={25} />}
-        </button>
+         {menuOpen ? (
+          <MdClose size={25} color="white" />
+            ) : (
+            <MdMenu size={25} color="white" />
+            )}
+</button>
 
-        {/* Cart Icon */}
+        {/* Cart icon */}
         <Link to="/cart" className="cart-link">
           <MdShoppingCart size={22} />
           <span className="cart-count">{cartItemCount}</span>
         </Link>
       </div>
 
-      {/* MOBILE DROPDOWN MENU */}
+      {/* MOBILE MENU DROPDOWN */}
       {menuOpen && (
-        <div className="mobile-menu">
-          <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
+        <div className="mobile-menu" ref={menuRef}>
+          <Link
+            to="/"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
             Home
           </Link>
-          <CategoryDropdown />
-          <Link to="/about" className="nav-link" onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/category/Nails"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Nails
+          </Link>
+          <Link
+            to="/category/Glasses"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Glasses
+          </Link>
+          <Link
+            to="/about"
+            className="mobile-link"
+            onClick={() => setMenuOpen(false)}
+          >
             About Us
           </Link>
         </div>
       )}
+
+      {/* INLINE MOBILE MENU STYLES */}
+      <style jsx="true">{`
+        .mobile-menu {
+          position: absolute;
+          top: 70px;
+          right: 15px;
+          background: black;
+          border-radius: 10px;
+          padding: 16px 20px;
+          width: 170px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          z-index: 999;
+          animation: slideDown 0.3s ease;
+        }
+
+        .mobile-link {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .mobile-link:hover {
+          text-decoration: underline;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* RESPONSIVE HANDLING */
+        @media (max-width: 768px) {
+          .desktop-only {
+            display: none;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .mobile-only {
+            display: none;
+          }
+        }
+      `}</style>
     </nav>
   );
 };

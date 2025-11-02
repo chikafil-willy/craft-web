@@ -42,9 +42,9 @@ const Home = () => {
 
   // Background images for hero and sections
   const heroImages = [
-    'https://vnwhmwwknjuzosarlump.supabase.co/storage/v1/object/public/images/IMG-20251024-WA0000.jpg',
-    'https://vnwhmwwknjuzosarlump.supabase.co/storage/v1/object/public/images/IMG-20251024-WA0004.jpg',
-    'https://vnwhmwwknjuzosarlump.supabase.co/storage/v1/object/public/images/IMG-20251024-WA0005.jpg',
+    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251029_143542_714.jpg',
+    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251029_143644_732.jpg',
+    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251102_184809_191.jpg',
   ];
 
   const [currentBg, setCurrentBg] = useState(0);
@@ -109,7 +109,7 @@ const Home = () => {
         className="shop-section"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1612817159949-1da3c2b4df07)',
+            'url(https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251101_073426_728.jpg)',
         }}
       >
         <div className="overlay">
@@ -123,7 +123,7 @@ const Home = () => {
         className="shop-section"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1587300003388-59208cc962cb)',
+            'url(https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251101_073407_611.jpg)',
         }}
       >
         <div className="overlay">

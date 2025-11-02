@@ -6,6 +6,8 @@ import Cart from './pages/Cart';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer'; // ✅ Import Footer
+import AboutUs from "./components/AboutUs";
+
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/category/:name" element={<Category />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/about" element={<AboutUs />} />
       </Routes>
       <Footer /> {/* ✅ Footer always visible */}
     </>

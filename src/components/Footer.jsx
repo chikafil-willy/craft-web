@@ -1,172 +1,116 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import whatsappLogo from "../assets/whatsapp.png";
+import instagramLogo from "../assets/instagram.png";
+import logo from "../assets/logo.png"; // ✅ make sure this path is correct
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        
-        {/* 🪞 Logo Section */}
-        <div className="footer-logo">
-          <img src="/logo.png" alt="V6ix Collection Logo" className="logo" />
-        </div>
-
-        {/* 📞 Contact Section */}
-        <div className="footer-section">
-          <h3>Contact Us</h3>
-          <ul className="footer-contacts">
-            <li>
-              <a
-                href="https://wa.me/2348180552305"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-link"
-              >
-                <img
-                  src="/whatsapp.png"
-                  alt="WhatsApp"
-                  className="whatsapp-img"
-                />
-                0818 055 2305
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://wa.me/2348098765432"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-link"
-              >
-                <img
-                  src="/whatsapp.png"
-                  alt="WhatsApp"
-                  className="whatsapp-img"
-                />
-                0809 876 5432
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* 🛍️ Categories Section */}
-        <div className="footer-section">
-          <h3>Categories</h3>
-          <ul className="footer-links">
-            <li><Link to="/category/shirts & polos">Shirts & Polos</Link></li>
-            <li><Link to="/category/trousers">Trousers</Link></li>
-            <li><Link to="/category/caps">Caps</Link></li>
-            <li><Link to="/category/jewelries">Jewelries</Link></li>
-            <li><Link to="/category/shoes">Shoes</Link></li>
-          </ul>
-        </div>
+    <footer
+      style={{
+        backgroundColor: "#302e2e",
+        textAlign: "center",
+        padding: "2rem 0 1rem 0",
+        borderTop: "1px solid #444",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1rem",
+      }}
+    >
+      {/* 🪞 Logo Section */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={logo}
+          alt="BitchCraft Logo"
+          style={{
+            width: "90px",
+            height: "90px",
+            objectFit: "contain",
+            borderRadius: "50%",
+          }}
+        />
       </div>
 
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} V6ix Collection. All rights reserved.</p>
+      {/* 🌐 Social Icons */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1.2rem",
+          marginTop: "0.8rem",
+        }}
+      >
+        <a
+          href="https://wa.me/2348085753930"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={whatsappLogo}
+            alt="WhatsApp"
+            style={{
+              width: "30px",
+              height: "30px",
+              objectFit: "contain",
+              borderRadius: "50%",
+              cursor: "pointer",
+              transition: "transform 0.3s ease",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.2)")}
+            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          />
+        </a>
+
+        <a
+          href="https://www.instagram.com/bitchcraftsclawz?igsh=ZDBkN2pyZWhnaTZw"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={instagramLogo}
+            alt="Instagram"
+            style={{
+              width: "30px",
+              height: "30px",
+              objectFit: "contain",
+              borderRadius: "50%",
+              cursor: "pointer",
+              transition: "transform 0.3s ease",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.2)")}
+            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          />
+        </a>
       </div>
 
-      {/* 💅 Inline CSS */}
-      <style jsx="true">{`
-        .footer {
-          background: #111;
-          color: #eee;
-          padding: 2rem 1rem;
-          text-align: center;
-        }
+      {/* 📧 Contact Info */}
+      <p
+        style={{
+          color: "#f5a623",
+          fontWeight: "500",
+          margin: "0.5rem 0 0",
+        }}
+      >
+        📧 bitchcraftclawz@yahoo.com
+      </p>
 
-        .footer-container {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-          margin-bottom: 1rem;
-        }
-
-        .footer-logo {
-          text-align: center;
-          flex: 1;
-          min-width: 150px;
-        }
-
-        .footer-logo .logo {
-          width: 100px;
-          margin-bottom: 0.5rem;
-        }
-
-        .footer-section {
-          flex: 1;
-          min-width: 150px;
-        }
-
-        .footer-section h3 {
-          margin-bottom: 0.5rem;
-          color: #ff4081;
-        }
-
-        .footer-links,
-        .footer-contacts {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .footer-links li,
-        .footer-contacts li {
-          margin: 5px 0;
-        }
-
-        .footer-links a,
-        .whatsapp-link {
-          color: #eee;
-          text-decoration: none;
-          transition: color 0.3s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .whatsapp-link:hover {
-          color: #ff4081;
-        }
-
-        .whatsapp-img {
-          width: 20px;
-          height: 20px;
-          margin-right: 8px;
-          border-radius: 10px;
-        }
-
-        .footer-bottom {
-          border-top: 1px solid #444;
-          padding-top: 0.8rem;
-          font-size: 0.9rem;
-          color: #bbb;
-        }
-
-        /* 📱 Keep row layout on mobile too */
-        @media (max-width: 768px) {
-          .footer-container {
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
-            text-align: center;
-            gap: 1rem;
-          }
-
-          .footer-section,
-          .footer-logo {
-            flex: 1;
-            min-width: 100px;
-          }
-
-          .footer-links a,
-          .whatsapp-link {
-            font-size: 0.9rem;
-          }
-        }
-      `}</style>
+      <p
+        style={{
+          fontSize: "0.9rem",
+          color: "#c0a5a5ff",
+          margin: "0.3rem 0",
+        }}
+      >
+        © 2025 BitchCraftClawz. All rights reserved.
+      </p>
     </footer>
   );
 };
