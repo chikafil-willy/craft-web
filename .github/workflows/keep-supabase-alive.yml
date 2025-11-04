@@ -1,0 +1,14 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    - cron: "0 9 * * 1,4"   # every Monday and Thursday at 09:00 UTC
+  workflow_dispatch:        # allows you to run it manually if needed
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase endpoint
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" https://prxmnwjvhajtpluaxmem.supabase.co/rest/v1/orders

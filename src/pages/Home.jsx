@@ -151,7 +151,7 @@ const Home = () => {
       {/* 🎨 Styles */}
       <style jsx="true">{`
         .scroll-banner {
-          background: linear-gradient(90deg, #000, #ff69b4);
+          background: linear-gradient(90deg, #000, #573848ff);
           color: white;
           padding: 10px 0;
           font-weight: bold;

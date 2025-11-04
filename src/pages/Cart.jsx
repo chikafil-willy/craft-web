@@ -86,7 +86,7 @@ Total: ₦${total.toLocaleString()}
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          _subject: '🛍️ New Order from V6ix Collection',
+          _subject: '🛍️ New Order from Bitchcraftclawz',
           message: message,
         }),
       });

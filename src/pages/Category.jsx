@@ -1,9 +1,8 @@
-// src/pages/Category.jsx
 import { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { SearchContext } from '../context/SearchContext';
-import { usePagination } from '../context/PaginationContext'; // ✅ Import pagination context
+import { usePagination } from '../context/PaginationContext';
 
 // ✅ Only two categories now
 const tableMap = {
@@ -15,7 +14,6 @@ const Category = () => {
   const { name } = useParams();
   const { searchTerm } = useContext(SearchContext);
 
-  // ✅ Pull state and actions from pagination context
   const {
     products,
     totalPages,
@@ -26,11 +24,9 @@ const Category = () => {
     resetPage,
   } = usePagination();
 
-  // ✅ Convert category from URL into Supabase table name
   const decodedName = decodeURIComponent(name).toLowerCase().trim();
   const tableName = tableMap[decodedName];
 
-  // ✅ Reset and fetch whenever category changes
   useEffect(() => {
     resetPage();
     if (tableName) {
@@ -38,28 +34,37 @@ const Category = () => {
     }
   }, [tableName]);
 
-  // ✅ Filter products by search
   const filteredProducts = products.filter((product) =>
     product.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="page-container">
-      <h2 className="category-title capitalize">{decodedName}</h2>
+      {/* ✅ Centered and single color */}
+      <h2
+        className="category-title capitalize"
+        style={{
+          textAlign: 'center',
+          fontWeight: '450',
+          fontSize: '1.8rem',
+          margin: '1.5rem 0',
+          color: 'orange', // 💡 your chosen single color
+        }}
+      >
+        {decodedName}
+      </h2>
 
       {filteredProducts.length === 0 ? (
-        <p>No products found in this category.</p>
+        <p style={{ textAlign: 'center' }}>No products found in this category.</p>
       ) : (
         <>
-          {/* ✅ Product grid */}
           <div className="grid">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
-          {/* ✅ Pagination controls */}
-          <div className="pagination">
+          <div className="pagination" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
             <button
               onClick={() => prevPage(tableName)}
               disabled={currentPage === 1}

@@ -1,7 +1,7 @@
 import React from "react";
 import whatsappLogo from "../assets/whatsapp.png";
 import instagramLogo from "../assets/instagram.png";
-import logo from "../assets/logo.png"; // ✅ make sure this path is correct
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -18,22 +18,16 @@ const Footer = () => {
         gap: "1rem",
       }}
     >
-      {/* 🪞 Logo Section */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      {/* 🪞 Logo */}
+      <div>
         <img
           src={logo}
-          alt="BitchCraft Logo"
+          alt="BitchCraftClawz Logo"
           style={{
             width: "90px",
             height: "90px",
             objectFit: "contain",
-            borderRadius: "50%",
+            borderRadius: "10px",
           }}
         />
       </div>
@@ -45,7 +39,7 @@ const Footer = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "1.2rem",
-          marginTop: "0.8rem",
+          marginTop: "0.5rem",
         }}
       >
         <a
@@ -91,17 +85,31 @@ const Footer = () => {
         </a>
       </div>
 
-      {/* 📧 Contact Info */}
+      {/* 📧 Contact + Policies */}
       <p
         style={{
           color: "#f5a623",
           fontWeight: "500",
           margin: "0.5rem 0 0",
+          fontSize: "0.95rem",
         }}
       >
-        📧 bitchcraftclawz@yahoo.com
+        📧 bitchcraftclawz@yahoo.com &nbsp; | &nbsp;
+        <a
+          href="/policy"
+          style={{
+            color: "#f5a623",
+            textDecoration: "none",
+            transition: "color 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#fff")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "#f5a623")}
+        >
+          Policies
+        </a>
       </p>
 
+      {/* ⚖️ Copyright */}
       <p
         style={{
           fontSize: "0.9rem",
