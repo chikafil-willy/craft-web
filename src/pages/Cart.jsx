@@ -154,8 +154,17 @@ Total: ₦${total.toLocaleString()}
 
           <h3>Total: ₦{total.toLocaleString()}</h3>
 
-          <button onClick={clearCart} style={{ marginBottom: '20px' }}>
-            Clear Cart
+          <button onClick={clearCart} style={{  
+            marginBottom: '20px',
+            padding: '10px 20px',
+            backgroundColor: '#ff4d4d',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            transition: 'background 0.3s', }}>
+            Clear
           </button>
 
           <form onSubmit={handleSubmit} className="checkout-form">

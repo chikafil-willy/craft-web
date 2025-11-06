@@ -4,6 +4,17 @@ import supabase from '../supabaseClient';
 import ProductCard from '../components/ProductCard';
 import { SearchContext } from '../context/SearchContext';
 
+// 🖼️ Import images from assets folder
+import hero1 from '../assets/hero1.jpg';
+import hero2 from '../assets/hero2.jpg';
+import hero3 from '../assets/hero3.jpg';
+import nailsBg from '../assets/nails-bg.jpg';
+import glassesBg from '../assets/glasses-bg.jpg';
+import gallery1 from '../assets/gallery1.jpg';
+import gallery2 from '../assets/gallery2.jpg';
+import gallery3 from '../assets/gallery3.jpg';
+import gallery4 from '../assets/gallery4.jpg';
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { searchTerm } = useContext(SearchContext);
@@ -40,39 +51,28 @@ const Home = () => {
     product.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Background images for hero and sections
-  const heroImages = [
-    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251029_143542_714.jpg',
-    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251029_143644_732.jpg',
-    'https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251102_184809_191.jpg',
-  ];
+  // 🖼️ Background image arrays
+  const heroImages = [hero1, hero2, hero3];
+  const galleryImages = [gallery1, gallery2, gallery3, gallery4];
 
   const [currentBg, setCurrentBg] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const galleryImages = [
-    'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
-    'https://images.unsplash.com/photo-1596464716121-3b4b62a9e2e6',
-    'https://images.unsplash.com/photo-1612817159949-1da3c2b4df07',
-    'https://images.unsplash.com/photo-1596464716121-3b4b62a9e2e7',
-  ];
-
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    const bgInterval = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
     }, 3500);
-    return () => clearInterval(slideInterval);
+
+    return () => {
+      clearInterval(bgInterval);
+      clearInterval(slideInterval);
+    };
   }, []);
 
-  // Simple navigation using window.location (since no useNavigate)
   const goToCategory = (category) => {
     window.location.href = `/category/${category}`;
   };
@@ -108,8 +108,7 @@ const Home = () => {
       <div
         className="shop-section"
         style={{
-          backgroundImage:
-            'url(https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251101_073426_728.jpg)',
+          backgroundImage: `url(${nailsBg})`,
         }}
       >
         <div className="overlay">
@@ -122,8 +121,7 @@ const Home = () => {
       <div
         className="shop-section"
         style={{
-          backgroundImage:
-            'url(https://prxmnwjvhajtpluaxmem.supabase.co/storage/v1/object/public/craft/IMG_20251101_073407_611.jpg)',
+          backgroundImage: `url(${glassesBg})`,
         }}
       >
         <div className="overlay">
