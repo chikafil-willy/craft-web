@@ -1,10 +1,8 @@
 // src/pages/Home.jsx
 import { useEffect, useState, useContext } from 'react';
 import supabase from '../supabaseClient';
-import ProductCard from '../components/ProductCard';
 import { SearchContext } from '../context/SearchContext';
 
-// 🖼️ Import images from assets folder
 import hero1 from '../assets/hero1.jpg';
 import hero2 from '../assets/hero2.jpg';
 import hero3 from '../assets/hero3.jpg';
@@ -18,60 +16,86 @@ import gallery4 from '../assets/gallery4.jpg';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { searchTerm } = useContext(SearchContext);
-
-  const tables = ['shirts_and_polos', 'trousers', 'caps', 'jewelries', 'shoes'];
-
-  const fetchFromTable = async (table) => {
-    const { data, error } = await supabase
-      .from(table)
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(2);
-
-    if (error) {
-      console.error(`Error fetching from ${table}:`, error.message);
-      return [];
-    }
-
-    return data.map((item) => ({ ...item, _category: table }));
-  };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const allResults = await Promise.all(tables.map(fetchFromTable));
-      const combined = allResults.flat();
-      const shuffled = combined.sort(() => Math.random() - 0.5);
-      setProducts(shuffled);
-    };
-
-    fetchAll();
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.name?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // 🖼️ Background image arrays
   const heroImages = [hero1, hero2, hero3];
   const galleryImages = [gallery1, gallery2, gallery3, gallery4];
-
   const [currentBg, setCurrentBg] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    const bgInterval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-
-    const slideInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
-    }, 3500);
-
+    const bgInterval = setInterval(() => setCurrentBg((prev) => (prev + 1) % heroImages.length), 4000);
+    const slideInterval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % galleryImages.length), 3500);
     return () => {
       clearInterval(bgInterval);
       clearInterval(slideInterval);
     };
   }, []);
+
+  // 🎯 Inline styles for first hero (fully controlled)
+  const heroContainerStyle = {
+  height: isMobile ? '55vh' : '70vh',
+  backgroundImage: `url(${heroImages[currentBg]})`,
+  backgroundSize: isMobile ? 'cover' : '70%', // 👈 adjust zoom here
+  backgroundPosition: isMobile ? 'center' : 'center 20%', // 👈 adjust focus area
+  position: 'relative',
+  backgroundRepeat: 'no-repeat', // 👈 add this line
+  backgroundColor: 'black',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  marginBottom: '20px',
+  transition: 'background-image 1s ease-in-out', // 👈 add this
+};
+
+
+  const heroOverlayStyle = {
+    background: 'rgba(0, 0, 0, 0.55)',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    color: '#fff',
+    paddingLeft: isMobile ? '20px' : '80px',
+    paddingRight: '20px',
+    textAlign: 'left',
+    boxSizing: 'border-box',
+  };
+
+  const h2Style = {
+    fontSize: isMobile ? '2rem' : '3.8rem',
+    color: '#ffb6c1',
+    fontWeight: 700,
+    marginBottom: '15px',
+    lineHeight: 1.2,
+  };
+
+  const pStyle = {
+    fontSize: isMobile ? '1rem' : '1.3rem',
+    color: '#f2f2f2',
+    lineHeight: 1.6,
+    maxWidth: isMobile ? '90%' : '550px',
+    marginBottom: '20px',
+  };
+
+  const buttonStyle = {
+    background: '#ff69b4',
+    border: 'none',
+    color: 'white',
+    padding: isMobile ? '10px 20px' : '12px 25px',
+    borderRadius: '30px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    transition: 'all .3s ease',
+  };
 
   const goToCategory = (category) => {
     window.location.href = `/category/${category}`;
@@ -79,65 +103,69 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* 🌀 Scrolling message */}
       <div className="scroll-banner">
         <p>
           <strong>Bitchcraft Clawz</strong> — Nail the look. Slay with style. 💅✨
         </p>
       </div>
 
-      {/* 💅 Hero Section */}
-      <div
-        className="hero-section"
-        style={{
-          backgroundImage: `url(${heroImages[currentBg]})`,
-        }}
-      >
-        <div className="overlay">
-          <div className="welcome-message">
-            <h2>Welcome to Bitchcraft Clawz</h2>
-            <p>
-              Where art meets confidence — your one-stop destination for flawless nails,
-              bold accessories, and unmatched elegance. Be bold, be flawless, be *you*.
-            </p>
+      {/* 🎯 First Hero Section */}
+      <div style={heroContainerStyle}>
+        <div style={heroOverlayStyle}>
+          <div style={{ ...h2Style, lineHeight: 1.5 }}>
+            <div>WELCOME</div>
+             <div>to</div>
+             <div>BITCHCRAFT</div>
+             <div>Clawz</div>
           </div>
+
+          <p style={pStyle}>
+            Where art meets confidence.
+          </p>
+          <button
+            style={buttonStyle}
+            onMouseOver={(e) => (e.target.style.background = '#ff85c1')}
+            onMouseOut={(e) => (e.target.style.background = '#ff69b4')}
+            onClick={() => goToCategory('nails')}
+          >
+            Shop Now
+          </button>
         </div>
       </div>
 
       {/* 💅 Shop Nails Section */}
-      <div
-        className="shop-section"
-        style={{
-          backgroundImage: `url(${nailsBg})`,
-        }}
-      >
+      <div className="shop-section" style={{ backgroundImage: `url(${nailsBg})` }}>
         <div className="overlay">
           <h2>Shop Our Exclusive Nail Collection</h2>
-          <button onClick={() => goToCategory('nails')}>Shop Nails</button>
+          <button
+            style={buttonStyle}
+            onMouseOver={(e) => (e.target.style.background = '#ff85c1')}
+            onMouseOut={(e) => (e.target.style.background = '#ff69b4')}
+            onClick={() => goToCategory('nails')}
+          >
+            Shop Nails
+          </button>
         </div>
       </div>
 
-      {/* 👓 Shop Glasses Section */}
-      <div
-        className="shop-section"
-        style={{
-          backgroundImage: `url(${glassesBg})`,
-        }}
-      >
+      {/* 😎 Shop Glasses Section */}
+      <div className="shop-section" style={{ backgroundImage: `url(${glassesBg})` }}>
         <div className="overlay">
           <h2>Discover Luxury Glasses & Accessories</h2>
-          <button onClick={() => goToCategory('glasses')}>Shop Glasses</button>
+          <button
+            style={buttonStyle}
+            onMouseOver={(e) => (e.target.style.background = '#ff85c1')}
+            onMouseOut={(e) => (e.target.style.background = '#ff69b4')}
+            onClick={() => goToCategory('glasses')}
+          >
+            Shop Glasses
+          </button>
         </div>
       </div>
 
-      {/* 🖼️ Swipeable Gallery */}
+      {/* 🖼️ Gallery Section */}
       <div className="gallery-section">
-        <div
-          className="gallery-slider"
-          style={{
-            transform: `translateX(-${currentSlide * 100}%)`,
-          }}
-        >
+        <div className="gallery-slider" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
           {galleryImages.map((img, i) => (
             <div key={i} className="gallery-slide">
               <img src={img} alt={`Gallery ${i + 1}`} />
@@ -146,7 +174,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* 🎨 Styles */}
       <style jsx="true">{`
         .scroll-banner {
           background: linear-gradient(90deg, #000, #573848ff);
@@ -165,25 +192,18 @@ const Home = () => {
         }
 
         @keyframes scrollText {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
         }
 
-        .hero-section,
         .shop-section {
           height: 70vh;
           background-size: cover;
           background-position: center;
-          background-repeat: no-repeat;
-          position: relative;
-          transition: background-image 1s ease-in-out;
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-bottom: 20px;
         }
 
         .overlay {
@@ -196,35 +216,18 @@ const Home = () => {
           justify-content: center;
           color: #fff;
           text-align: center;
-          padding: 0 15px;
         }
 
         .overlay h2 {
           font-size: 2rem;
-          margin-bottom: 1rem;
-        }
-
-        .overlay button {
-          background: #ff69b4;
-          border: none;
-          color: white;
-          padding: 12px 25px;
-          border-radius: 30px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: 0.3s ease;
-        }
-
-        .overlay button:hover {
-          background: #ff85c1;
-          transform: scale(1.05);
+          margin-bottom: 15px;
         }
 
         .gallery-section {
           overflow: hidden;
           width: 100%;
-          position: relative;
           height: 300px;
+          margin-top: 50px;
         }
 
         .gallery-slider {
@@ -243,28 +246,14 @@ const Home = () => {
         }
 
         @media (max-width: 768px) {
-          .hero-section,
           .shop-section {
             height: 55vh;
           }
-
           .overlay h2 {
             font-size: 1.5rem;
           }
-
-          .overlay button {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-          }
-
-          .gallery-section {
-            height: 200px;
-          }
-
-          .gallery-slide img {
-            height: 200px;
-          }
         }
+          
       `}</style>
     </div>
   );

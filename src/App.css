@@ -221,20 +221,44 @@
 }
 
 .welcome-message {
-  text-align: center;
-  margin: 30px 0;
+  margin: 30px 80px; /* 👈 space from screen edge */
+  max-width: 600px; /* 👈 prevent too wide text */
 }
 
 .welcome-message h2 {
-  font-size: 2rem;
-  color: #8d64ec;
-  margin-bottom: 10px;
+  font-size: 3.5rem; /* 👈 larger heading */
+  color: #ffb6c1; /* soft pink or adjust to your theme */
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
 }
 
 .welcome-message p {
-  font-size: 1.1rem;
-  color: #eee5e5;
+  font-size: 1.3rem; /* 👈 smaller but clear text */
+  color: #f2f2f2;
+  line-height: 1.6;
+  max-width: 550px;
 }
+
+/* 💻 Desktop only: make it even more elegant */
+@media (min-width: 1024px) {
+  .welcome-message h2 {
+    font-size: 4rem;
+  }
+
+  .welcome-message p {
+    font-size: 1.4rem;
+  }
+}
+
+/* 📱 Mobile view: center again for small screens */
+@media (max-width: 768px) {
+  .welcome-message {
+    text-align: center;
+    margin: 20px;
+  }
+}
+
 /* Grid container for products */
 /* Grid container for products */
 .grid {
@@ -301,6 +325,10 @@
   margin: 5px 0;
   flex-shrink: 0;
   color: #1b8cce;
+   white-space: nowrap;       /* keep name in a single line */
+  overflow: hidden;          /* hide the overflowing text */
+  text-overflow: ellipsis;   /* show ... if too long */
+  width: 100%;               /* ensure it respects the card width */
 }
 
 .card p {
@@ -326,24 +354,44 @@
   cursor: not-allowed;
 }
 
-/* Mobile tweaks */
 @media (max-width: 768px) {
   .card {
-    height: 260px; /* slightly shorter on mobile */
+    height: 260px; /* keep height fixed */
+    overflow: hidden; /* prevent any overflow expansion */
   }
 
   .card img {
-    height: 165px; /* smaller images on mobile */
+    height: 165px; /* fixed image height */
+    min-height: 165px;
+    max-height: 165px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* prevents child expansion */
   }
 
   .card h3 {
     font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .card p {
     font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
+
 /* General Cart Page */
 .cart-page {
   max-width: 900px;

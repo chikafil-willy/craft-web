@@ -82,7 +82,7 @@ ${formattedItems}
 Total: ₦${total.toLocaleString()}
 `;
 
-      await fetch('https://formspree.io/f/xpwykyaw', {
+      await fetch('https://formspree.io/f/mkgpdvnb', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -209,23 +209,37 @@ Total: ₦${total.toLocaleString()}
       )}
 
       {/* PAYMENT MESSAGE */}
-      {showPayment && (
-        <div className="payment-info">
-          <h3>Order Placed Successfully ✅</h3>
-          <p>Please make payment using the option below:</p>
+{showPayment && (
+  <div className="payment-info">
+    <h3>Order Placed Successfully ✅</h3>
+    <p>Please make payment using the option below:</p>
 
-          <div className="bank-details">
-            <h4>Bank Transfer</h4>
-            <p><strong>Account Name:</strong> Victor Ahalaekwue</p>
-            <p><strong>Account Number:</strong> 9061121025</p>
-            <p><strong>Bank:</strong> Fcmb</p>
-          </div>
+    <div className="bank-details">
+      <h4>Bank Transfer</h4>
+      <p><strong>Account Name:</strong> Sharon</p>
+      <p><strong>Account Number:</strong> 12345678</p>
+      <p><strong>Bank:</strong> Access Bank</p>
+    </div>
 
-          <p className="thank-you">
-            After payment, kindly send proof to our support WhatsApp 08180552305 📱
-          </p>
-        </div>
-      )}
+    <div className="btc-details"  style={{
+  padding: '15px 20px',
+  borderRadius: '8px',
+  marginTop: '15px',
+  maxWidth: '100%',
+  wordBreak: 'break-word',
+  background: 'rgba(0,0,0,0.05)'
+}}>
+      <h4>Bitcoin Payment</h4>
+      <p><strong>Wallet Address:</strong> bc1qc3vgmauq4fjt6e786l5cjn73wdw3q8q55a6lxe</p>
+      <p>Send the exact amount to this BTC wallet.</p>
+    </div>
+
+    <p className="thank-you">
+      After payment, kindly send proof to our support WhatsApp 12345678 📱
+    </p>
+  </div>
+)}
+
     </div>
   );
 };
