@@ -36,7 +36,7 @@
 .dropdown-content a,
 .dropbtn {
   text-decoration: none;
-  color: #1b8cce; /* main color */
+  color: #f3f6f8; /* main color */
   font-weight: 500;
   transition: color 0.3s ease;
 }
@@ -44,7 +44,7 @@
 .nav-link:hover,
 .dropdown-content a:hover,
 .dropbtn:hover {
-  color: #ffffff; /* hover color (white for contrast on dark background) */
+  color: #8084b9; /* hover color (white for contrast on dark background) */
 }
 
 /* Category dropdown styling */
@@ -83,7 +83,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  color: #1b8cce;
+  color: #cfdfe9;
   text-decoration: none;
   transition: color 0.3s ease;
 }

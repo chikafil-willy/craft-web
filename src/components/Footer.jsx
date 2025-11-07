@@ -43,7 +43,7 @@ const Footer = () => {
         }}
       >
         <a
-          href="https://wa.me/2348085753930"
+          href="https://wa.me/08085753930"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -94,7 +94,7 @@ const Footer = () => {
           fontSize: "0.95rem",
         }}
       >
-        📧 bitchcraftclawz@yahoo.com &nbsp; | &nbsp;
+        📧 mistresssharon224@yahoo.com &nbsp; | &nbsp;
         <a
           href="/policy"
           style={{

@@ -216,8 +216,8 @@ Total: ₦${total.toLocaleString()}
 
     <div className="bank-details">
       <h4>Bank Transfer</h4>
-      <p><strong>Account Name:</strong> Sharon</p>
-      <p><strong>Account Number:</strong> 12345678</p>
+      <p><strong>Account Name:</strong>Olaitan Olajumoke Ifeoluwa</p>
+      <p><strong>Account Number:</strong> 0765630760</p>
       <p><strong>Bank:</strong> Access Bank</p>
     </div>
 
@@ -235,7 +235,7 @@ Total: ₦${total.toLocaleString()}
     </div>
 
     <p className="thank-you">
-      After payment, kindly send proof to our support WhatsApp 12345678 📱
+      After payment, kindly send proof to our support WhatsApp 08085753930 📱
     </p>
   </div>
 )}
