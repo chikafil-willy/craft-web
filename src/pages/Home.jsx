@@ -71,7 +71,7 @@ const Home = () => {
   };
 
   const h2Style = {
-    fontSize: isMobile ? '2rem' : '3.8rem',
+    fontSize: isMobile ? '2rem' : '3.2rem',
     color: '#ffb6c1',
     fontWeight: 700,
     marginBottom: '15px',
